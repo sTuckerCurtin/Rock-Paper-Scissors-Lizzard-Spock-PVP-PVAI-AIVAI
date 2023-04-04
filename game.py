@@ -38,7 +38,7 @@ class Game():
         
         self.start = input("How many players? 1, 2, or 3 for a surprise. ")
         if self.start == "1":
-            self.player = Human('Player1')
+            self.player_one = Human('Player1')
             self.ai = AI()
         elif self.start == "2":
             self.player = Human('Player1')
@@ -54,16 +54,16 @@ class Game():
 
 
     def game_run(self):
-        while self.player_one.points <2 and self.player_two.points <2:
-            if self.player.prompt == player_two_gesture:
+        while self.player.player_one_score <2 and self.player.player_two_score <2:
+            if self.player.player_one.gesture_options == self.player.player_two.gesture_options:
                 return "tie"
-            elif player_one_gesture == "Rock":
-                if player_two_gesture == "Scissors" or player_two_gesture == "Lizard":
+            elif self.player.gesture_options == "Rock":
+                if self.player2.gesture_options == "Scissors" or self.player2.gesture_options == "Lizard":
                     return "player one wins"
                 else:
                     return "player two wins"
-            elif player_one_gesture == "Paper":
-                if player_two_gesture == "Rock" or player_two_gesture == "Spock":
+            elif self.player.gesture_options == "Paper":
+                if self.player2.gesture_options == "Rock" or player_two_gesture == "Spock":
                     return "player one wins"
                 else:
                     return "player two wins"
