@@ -1,4 +1,3 @@
-from player import Player
 from ai import AI
 from human import Human
 
@@ -38,14 +37,14 @@ class Game():
         
         self.start = input("How many players? 1, 2, or 3 for a surprise. ")
         if self.start == "1":
-            self.player_one = Human('Player1')
-            self.ai = AI()
+            self.P1 = Human('Player1')
+            self.P2 = AI()
         elif self.start == "2":
-            self.player = Human('Player1')
-            self.player2 = Human('Player2')
+            self.P1 = Human('Player1')
+            self.P2 = Human('Player2')
         elif self.start == "3":
-            self.ai = AI("Player 1")
-            self.ai = AI("Player 2")
+            self.P1 = AI("Player 1")
+            self.P2 = AI("Player 2")
         else:
             print("Please enter a valid key.")
             
@@ -54,31 +53,31 @@ class Game():
 
 
     def game_run(self):
-        while self.player.player_one_score <2 and self.player.player_two_score <2:
-            if self.player.player_one.gesture_options == self.player.player_two.gesture_options:
+        while self.P1.player_one_score <2 and self.P2.player_two_score <2:
+            if self.P1.gesture_options == self.P2.gesture_options:
                 return "tie"
-            elif self.player.gesture_options == "Rock":
-                if self.player2.gesture_options == "Scissors" or self.player2.gesture_options == "Lizard":
+            elif self.P1.gesture_options == "Rock":
+                if self.P2.gesture_options == "Scissors" or self.P2.gesture_options == "Lizard":
                     return "player one wins"
                 else:
                     return "player two wins"
-            elif self.player.gesture_options == "Paper":
-                if self.player2.gesture_options == "Rock" or player_two_gesture == "Spock":
+            elif self.P1.gesture_options == "Paper":
+                if self.P2.gesture_options == "Rock" or self.P2.gesture_options == "Spock":
                     return "player one wins"
                 else:
                     return "player two wins"
-            elif player_one_gesture == "Scissors":
-                if player_two_gesture == "Paper" or player_two_gesture == "Lizard":
+            elif self.P1.gesture_options == "Scissors":
+                if self.P2.gesture_options == "Paper" or self.P2.gesture_options == "Lizard":
                     return "player one wins"
                 else:
                     return "player two wins"
-            elif player_one_gesture == "Lizard":
-                if player_two_gesture == "Paper" or player_two_gesture == "Spock":
+            elif self.P1.gesture_options == "Lizard":
+                if self.P2.gesture_options == "Paper" or self.P2.gesture_options == "Spock":
                     return "player one wins"
                 else:
                     return "player two wins"
-            elif player_one_gesture == "Spock":
-                if player_two_gesture == "Scissor" or player_two_gesture == "Rock":
+            elif self.P1.gesture_options == "Spock":
+                if self.P2.gesture_options == "Scissor" or self.P2.gesture_options == "Rock":
                     return "player one wins"
                 else:
                     return "player two wins"
