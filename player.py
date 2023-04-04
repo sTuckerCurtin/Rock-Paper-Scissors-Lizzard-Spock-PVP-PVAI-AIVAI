@@ -10,4 +10,7 @@ class Player:
     def two_players(self):
         self.player_one = player_one
         self.player_two = player_two
+        self.player_one_score = 0
+        self.player_two_score = 0
+
  

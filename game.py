@@ -1,6 +1,6 @@
 from player import Player
 from ai import AI
-
+from human import Human
 
 Gestures = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
 
@@ -14,7 +14,7 @@ class Game():
         self.player_one_score = 0
         self.player_two_score = 0
         self.round_number = 0
-        self.player = Player('Player1', 'Player2')
+        self.player = Human('Player1', 'Player2')
         self.ai = AI('AI')
 
 
@@ -36,29 +36,25 @@ class Game():
         print("Spock vaporizes Rock")
         print()
         
-        
         self.start = input("How many players? 1, 2, or 3 for a surprise. ")
         if self.start == "1":
-            self.player.player_one and self.ai.player_two
-            # opponent = self.ai.name
-        elif self.start =="2":
-            self.player.player_one and self.player.player_two
-            # player1 = self.player.player1
+            self.player = Human('Player1')
+            self.ai = AI()
+        elif self.start == "2":
+            self.player = Human('Player1')
+            self.player2 = Human('Player2')
         elif self.start == "3":
-            self.ai.player_one and self.ai.player_two
-
-            # self.ai.name == self.ai.name
+            self.ai = AI("Player 1")
+            self.ai = AI("Player 2")
         else:
-            "Please enter a different key."
+            print("Please enter a valid key.")
             
         # self.list = print(f" 1.{Gestures[0]}, 2.{Gestures[1]}, 3.{Gestures[2]} 4.{Gestures[3]}, 5.{Gestures[4]}")
 
 
 
-    def game_run(self, player1, ):
-        self.player1 = player1
-        self.player2 = player2
-        while self.player1.points <2 and self.player2.points <2:
+    def game_run(self):
+        while self.player_one.points <2 and self.player_two.points <2:
             if self.player.prompt == player_two_gesture:
                 return "tie"
             elif player_one_gesture == "Rock":
