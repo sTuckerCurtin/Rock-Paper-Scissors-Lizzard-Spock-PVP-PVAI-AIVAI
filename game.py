@@ -1,0 +1,1 @@
+Gestures = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
