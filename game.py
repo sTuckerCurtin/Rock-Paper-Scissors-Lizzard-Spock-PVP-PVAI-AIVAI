@@ -109,19 +109,17 @@ class Game():
                 print("Player 2 wins the game!") 
 
     def game_run_ai_ai(self):
-            while True:
-            
-                if self.P1_current_score <= 2 and self.P2_current_score <= 2:
+            while self.P1_current_score <= 2 and self.P2_current_score <= 2:
                     
-                    p1_choice = self.P1.choose_gestures()
-                    p2_choice = self.P2.choose_gestures()
+                p1_choice = self.P1.choose_gestures()
+                p2_choice = self.P2.choose_gestures()
                 if p1_choice == p2_choice:
                     print("Tie!")
                 elif (p1_choice == "Rock" and (p2_choice == "Scissors" or p2_choice == "Lizard")) or \
-                    (p1_choice == "Paper" and (p2_choice == "Rock" or p2_choice == "Spock")) or \
-                    (p1_choice == "Scissors" and (p2_choice == "Paper" or p2_choice == "Lizard")) or \
-                    (p1_choice == "Lizard" and (p2_choice == "Paper" or p2_choice == "Spock")) or \
-                    (p1_choice == "Spock" and (p2_choice == "Rock" or p2_choice == "Scissors")):
+                        (p1_choice == "Paper" and (p2_choice == "Rock" or p2_choice == "Spock")) or \
+                        (p1_choice == "Scissors" and (p2_choice == "Paper" or p2_choice == "Lizard")) or \
+                        (p1_choice == "Lizard" and (p2_choice == "Paper" or p2_choice == "Spock")) or \
+                        (p1_choice == "Spock" and (p2_choice == "Rock" or p2_choice == "Scissors")):
                     self.P1.score_point()
                     self.P1_current_score += 1
                     print("Player 1 wins this round!")
