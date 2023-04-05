@@ -61,7 +61,7 @@ class Game():
 
 
     def game_run_player_ai(self):
-        while self.P1_current_score < 3 and self.P2_current_score < 3:
+        while self.P1_current_score < 2 and self.P2_current_score < 2:
             p1_choice = input("Player 1, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
             p2_choice = self.P2.choose_gestures()
             if p1_choice == p2_choice:
@@ -85,7 +85,7 @@ class Game():
             print("Player 2 wins the game!")           
 
     def game_run_player_player(self):
-            while self.P1_current_score < 3 and self.P2_current_score < 3:
+            while self.P1_current_score < 2 and self.P2_current_score < 2:
                 p1_choice = input("Player 1, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
                 p2_choice = input("Player 2, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
                 if p1_choice == p2_choice:
@@ -109,7 +109,10 @@ class Game():
                 print("Player 2 wins the game!") 
 
     def game_run_ai_ai(self):
-            while self.P1_current_score < 3 and self.P2_current_score < 3:
+            while True:
+            
+                if self.P1_current_score <= 2 and self.P2_current_score <= 2:
+                    break
                 p1_choice = self.P1.choose_gestures()
                 p2_choice = self.P2.choose_gestures()
                 if p1_choice == p2_choice:
@@ -132,7 +135,7 @@ class Game():
             else:
                 print("Player 2 wins the game!") 
 
-    
+
 
 
 
