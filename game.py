@@ -18,7 +18,6 @@ class Game():
 
     def run_game(self):
         self.game_start()
-        self.game_run()
         self.display_winner()        
 
 
@@ -44,50 +43,99 @@ class Game():
         if self.start == "1":
             self.P1 = Human('Player1')
             self.P2 = AI('AI')
+            self.game_run_player_ai()
         elif self.start == "2":
             self.P1 = Human('Player1')
             self.P2 = Human('Player2')
+            self.game_run_player_player()
         elif self.start == "3":
             self.P1 = AI("Player 1")
             self.P2 = AI("Player 2")
+            self.game_run_ai_ai()
         else:
             print("Please enter a valid key.")
+            self.game_start()
         
        
 
 
 
-    def game_run(self):
-        while self.P1_current_score == 0 and self.P2_current_score == 0:
-            if self.P1.choose_gestures() == self.P2.choose_gestures():
-                print("tie")
-            elif self.P1.choose_gestures([0]) == "Rock":
-                if self.P2.choose_gestures([2]) == "Scissors" or self.P2.choose_gestures([3]) == "Lizard":
-                    return self.P1.score_point()
+    def game_run_player_ai(self):
+        while self.P1_current_score < 3 and self.P2_current_score < 3:
+            p1_choice = input("Player 1, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
+            p2_choice = self.P2.choose_gestures()
+            if p1_choice == p2_choice:
+                print("Tie!")
+            elif (p1_choice == "Rock" and (p2_choice == "Scissors" or p2_choice == "Lizard")) or \
+                    (p1_choice == "Paper" and (p2_choice == "Rock" or p2_choice == "Spock")) or \
+                    (p1_choice == "Scissors" and (p2_choice == "Paper" or p2_choice == "Lizard")) or \
+                    (p1_choice == "Lizard" and (p2_choice == "Paper" or p2_choice == "Spock")) or \
+                    (p1_choice == "Spock" and (p2_choice == "Rock" or p2_choice == "Scissors")):
+                self.P1.score_point()
+                self.P1_current_score += 1
+                print("Player 1 wins this round!")
+            else:
+                self.P2.score_point()
+                self.P2_current_score += 1
+                print("Player 2 wins this round!")
+        print(f"Final score - Player 1: {self.P1.score}, Player 2: {self.P2.score}")
+        if self.P1_current_score == 3:
+            print("Player 1 wins the game!")
+        else:
+            print("Player 2 wins the game!")           
+
+    def game_run_player_player(self):
+            while self.P1_current_score < 3 and self.P2_current_score < 3:
+                p1_choice = input("Player 1, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
+                p2_choice = input("Player 2, choose your gesture (Rock, Paper, Scissors, Lizard, Spock): ")
+                if p1_choice == p2_choice:
+                    print("Tie!")
+                elif (p1_choice == "Rock" and (p2_choice == "Scissors" or p2_choice == "Lizard")) or \
+                        (p1_choice == "Paper" and (p2_choice == "Rock" or p2_choice == "Spock")) or \
+                        (p1_choice == "Scissors" and (p2_choice == "Paper" or p2_choice == "Lizard")) or \
+                        (p1_choice == "Lizard" and (p2_choice == "Paper" or p2_choice == "Spock")) or \
+                        (p1_choice == "Spock" and (p2_choice == "Rock" or p2_choice == "Scissors")):
+                    self.P1.score_point()
+                    self.P1_current_score += 1
+                    print("Player 1 wins this round!")
                 else:
-                    return self.P2.score_point()
-            elif self.P1.choose_gestures([1]) == "Paper":
-                if self.P2.choose_gestures([0]) == "Rock" or self.P2.choose_gestures([4]) == "Spock":
-                    return self.P1.score_point()
+                    self.P2.score_point()
+                    self.P2_current_score += 1
+                    print("Player 2 wins this round!")
+            print(f"Final score - Player 1: {self.P1.score}, Player 2: {self.P2.score}")
+            if self.P1_current_score == 3:
+                print("Player 1 wins the game!")
+            else:
+                print("Player 2 wins the game!") 
+
+    def game_run_ai_ai(self):
+            while self.P1_current_score < 3 and self.P2_current_score < 3:
+                p1_choice = self.P1.choose_gestures()
+                p2_choice = self.P2.choose_gestures()
+                if p1_choice == p2_choice:
+                    print("Tie!")
+                elif (p1_choice == "Rock" and (p2_choice == "Scissors" or p2_choice == "Lizard")) or \
+                        (p1_choice == "Paper" and (p2_choice == "Rock" or p2_choice == "Spock")) or \
+                        (p1_choice == "Scissors" and (p2_choice == "Paper" or p2_choice == "Lizard")) or \
+                        (p1_choice == "Lizard" and (p2_choice == "Paper" or p2_choice == "Spock")) or \
+                        (p1_choice == "Spock" and (p2_choice == "Rock" or p2_choice == "Scissors")):
+                    self.P1.score_point()
+                    self.P1_current_score += 1
+                    print("Player 1 wins this round!")
                 else:
-                    return self.P2.score_point()
-            elif self.P1.choose_gestures([2]) == "Scissors":
-                if self.P2.choose_gestures([1]) == "Paper" or self.P2.choose_gestures([3]) == "Lizard":
-                    return self.P1.score_point()
-                else:
-                    return self.P2.score_point()
-            elif self.P1.choose_gestures([3]) == "Lizard":
-                if self.P2.choose_gestures([1]) == "Paper" or self.P2.choose_gestures([4]) == "Spock":
-                    return self.P1.score_point()
-                else:
-                    return self.P2.score_point()
-            elif self.P1.choose_gestures([4]) == "Spock":
-                if self.P2.choose_gestures([2]) == "Scissors" or self.P2.choose_gestures([0]) == "Rock":
-                    return self.P1.score_point()
-                else:
-                    return self.P2.score_point()
-           
-                
+                    self.P2.score_point()
+                    self.P2_current_score += 1
+                    print("Player 2 wins this round!")
+            print(f"Final score - Player 1: {self.P1.score}, Player 2: {self.P2.score}")
+            if self.P1_current_score == 3:
+                print("Player 1 wins the game!")
+            else:
+                print("Player 2 wins the game!") 
+
+    
+
+
+
 
     def display_winner(self):
             if self.P1_current_score > self.P2_current_score:

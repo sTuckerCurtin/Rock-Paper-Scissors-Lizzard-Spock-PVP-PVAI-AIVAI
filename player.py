@@ -12,4 +12,4 @@ class Player:
         self.gesture_options = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
 
     def score_point(self):
-        self.score += 1      
+        self.score += 1
