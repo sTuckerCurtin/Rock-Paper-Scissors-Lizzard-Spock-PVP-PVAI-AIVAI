@@ -11,4 +11,5 @@ class Player:
     def choose_gestures(self):
         self.gesture_options = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
 
-  
+    def score_point(self):
+        self.score += 1      

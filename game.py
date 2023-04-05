@@ -3,22 +3,20 @@ from human import Human
 
 Gestures = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
 
-
-
 class Game():
     def __init__(self):
         self.gesture_options = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
         self.best_of_rounds = 2
-        self.P1 = Human("player1") or AI("AI1")
-        self.P2 = Human("player2") or AI("AI2")
-        self.P1_player_one_score = 0
-        self.P2_player_two_score = 0
+        self.P1 = None
+        self.P2 = None
+        self.P1_current_score = 0
+        self.P2_current_score = 0
 
+      
         
-        
 
 
-    def game_run(self):
+    def run_game(self):
         self.game_start()
         self.game_run()
         self.display_winner()        
@@ -45,7 +43,7 @@ class Game():
         self.start = input("How many players? 1, 2, or 3 for a surprise. ")
         if self.start == "1":
             self.P1 = Human('Player1')
-            self.P2 = AI()
+            self.P2 = AI('AI')
         elif self.start == "2":
             self.P1 = Human('Player1')
             self.P2 = Human('Player2')
@@ -54,52 +52,49 @@ class Game():
             self.P2 = AI("Player 2")
         else:
             print("Please enter a valid key.")
-            
+        
        
 
 
 
     def game_run(self):
-        while self.P1.player_one_score == 0 and self.P2.player_two_score == 0:
-            if self.P1.gesture_options == self.P2.gesture_options:
-                return "tie"
-            elif self.P1.gesture_options == "Rock":
-                if self.P2.gesture_options == "Scissors" or self.P2.gesture_options == "Lizard":
-                    return "player one wins" 
+        while self.P1_current_score == 0 and self.P2_current_score == 0:
+            if self.P1.choose_gestures() == self.P2.choose_gestures():
+                print("tie")
+            elif self.P1.choose_gestures([0]) == "Rock":
+                if self.P2.choose_gestures([2]) == "Scissors" or self.P2.choose_gestures([3]) == "Lizard":
+                    return self.P1.score_point()
                 else:
-                    return "player two wins"
-            elif self.P1.gesture_options == "Paper":
-                if self.P2.gesture_options == "Rock" or self.P2.gesture_options == "Spock":
-                    return "player one wins"
+                    return self.P2.score_point()
+            elif self.P1.choose_gestures([1]) == "Paper":
+                if self.P2.choose_gestures([0]) == "Rock" or self.P2.choose_gestures([4]) == "Spock":
+                    return self.P1.score_point()
                 else:
-                    return "player two wins"
-            elif self.P1.gesture_options == "Scissors":
-                if self.P2.gesture_options == "Paper" or self.P2.gesture_options == "Lizard":
-                    return "player one wins"
+                    return self.P2.score_point()
+            elif self.P1.choose_gestures([2]) == "Scissors":
+                if self.P2.choose_gestures([1]) == "Paper" or self.P2.choose_gestures([3]) == "Lizard":
+                    return self.P1.score_point()
                 else:
-                    return "player two wins"
-            elif self.P1.gesture_options == "Lizard":
-                if self.P2.gesture_options == "Paper" or self.P2.gesture_options == "Spock":
-                    return "player one wins"
+                    return self.P2.score_point()
+            elif self.P1.choose_gestures([3]) == "Lizard":
+                if self.P2.choose_gestures([1]) == "Paper" or self.P2.choose_gestures([4]) == "Spock":
+                    return self.P1.score_point()
                 else:
-                    return "player two wins"
-            elif self.P1.gesture_options == "Spock":
-                if self.P2.gesture_options == "Scissors" or self.P2.gesture_options == "Rock":
-                    return "player one wins"
+                    return self.P2.score_point()
+            elif self.P1.choose_gestures([4]) == "Spock":
+                if self.P2.choose_gestures([2]) == "Scissors" or self.P2.choose_gestures([0]) == "Rock":
+                    return self.P1.score_point()
                 else:
-                    return "player two wins"
+                    return self.P2.score_point()
             
                 
 
     def display_winner(self):
-            if self.P1.player_one_score > self.P2.player_two_score:
+            if self.P1_current_score > self.P2_current_score:
                 print()
                 print(f"The winner is {self.P1.name}!")
-            elif self.P2.player_two_score > self.P1.player_one_score:
+            elif self.P2_current_score > self.P1_current_score:
                 print()
                 print(f"The winner is {self.P2.name}! ")
                 
-
-
-            
 
