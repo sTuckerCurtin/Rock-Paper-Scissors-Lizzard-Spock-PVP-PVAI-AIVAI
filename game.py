@@ -86,7 +86,7 @@ class Game():
                     return self.P1.score_point()
                 else:
                     return self.P2.score_point()
-            
+           
                 
 
     def display_winner(self):
