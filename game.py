@@ -8,13 +8,20 @@ Gestures = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
 class Game():
     def __init__(self):
         self.gesture_options = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
-        # self.best_of_rounds = best_of_rounds
-        # self.is_multiplayer = is_multiplayer
-        self.player_one_score = 0
-        self.player_two_score = 0
-        self.round_number = 0
-        self.player = Human('Player1', 'Player2')
-        self.ai = AI('AI')
+        self.best_of_rounds = 2
+        self.P1 = Human("player1") or AI("AI1")
+        self.P2 = Human("player2") or AI("AI2")
+        self.P1_player_one_score = 0
+        self.P2_player_two_score = 0
+
+        
+        
+
+
+    def game_run(self):
+        self.game_start()
+        self.game_run()
+        self.display_winner()        
 
 
     def game_start(self):
@@ -48,17 +55,17 @@ class Game():
         else:
             print("Please enter a valid key.")
             
-        # self.list = print(f" 1.{Gestures[0]}, 2.{Gestures[1]}, 3.{Gestures[2]} 4.{Gestures[3]}, 5.{Gestures[4]}")
+       
 
 
 
     def game_run(self):
-        while self.P1.player_one_score <2 and self.P2.player_two_score <2:
+        while self.P1.player_one_score == 0 and self.P2.player_two_score == 0:
             if self.P1.gesture_options == self.P2.gesture_options:
                 return "tie"
             elif self.P1.gesture_options == "Rock":
                 if self.P2.gesture_options == "Scissors" or self.P2.gesture_options == "Lizard":
-                    return "player one wins"
+                    return "player one wins" 
                 else:
                     return "player two wins"
             elif self.P1.gesture_options == "Paper":
@@ -77,9 +84,22 @@ class Game():
                 else:
                     return "player two wins"
             elif self.P1.gesture_options == "Spock":
-                if self.P2.gesture_options == "Scissor" or self.P2.gesture_options == "Rock":
+                if self.P2.gesture_options == "Scissors" or self.P2.gesture_options == "Rock":
                     return "player one wins"
                 else:
                     return "player two wins"
+            
+                
+
+    def display_winner(self):
+            if self.P1.player_one_score > self.P2.player_two_score:
+                print()
+                print(f"The winner is {self.P1.name}!")
+            elif self.P2.player_two_score > self.P1.player_one_score:
+                print()
+                print(f"The winner is {self.P2.name}! ")
+                
+
+
             
 
